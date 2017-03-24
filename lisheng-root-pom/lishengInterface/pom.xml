@@ -6,4 +6,20 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>lishengInterface</artifactId>
+  
+  
+  <distributionManagement>
+		<!-- 配置快照版本发布的仓库 -->
+		<snapshotRepository>
+			<id>nexus_snapshots</id>
+			<name>Nexus Snapshots Repository</name>
+			<url>http://10.100.100.201:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<!-- 配置release版本发布的仓库 -->
+		<repository>
+			<id>nexus_releases</id>
+			<name>Nexus Releases Repository</name>
+			<url>http://10.100.100.201:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 </project>

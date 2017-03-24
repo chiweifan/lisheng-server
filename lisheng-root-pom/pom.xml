@@ -8,5 +8,6 @@
   	<module>lishengManagement</module>
   	<module>lishengInterface</module>
   	<module>lishengService</module>
+  	<module>lishengWeb</module>
   </modules>
 </project>
