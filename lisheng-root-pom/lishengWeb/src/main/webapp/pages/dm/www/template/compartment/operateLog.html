@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-lg-12 list-box">
+        <!--pin title-->
+        <div class="main-box pin-title">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table">
+                    <tr>
+                        <td>操作时间</td>
+                        <td>操作人</td>
+                        <td>操作日志</td>
+                        <td>结果</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--no contract-->
+        <div class="main-box empty-list" ng-if="!operateLogs">
+            暂无数据
+        </div>
+
+        <!--订单-->
+        <div class="main-box" ng-repeat="log in operateLogs">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table">
+                    <tr>
+                        <td>
+                            {{log.createTime | date:'yyyy-MM-dd'}}
+                        </td>
+                        
+                        <td>
+                            {{log.userName}}
+                        </td>
+
+                        <td>
+                            {{log.operation}}
+                        </td>
+                        <td>
+                            {{log.result}}
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--normal page-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box">
+            <div class="dataTables_paginate paging_simple_numbers">
+                <ul class="pagination pull-right">
+                    <li class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">(共{{maxPageSkip}}页)</a>
+                    </li>
+                    <li ng-click="getList(1,sdata)" class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">首页</a>
+                    </li>
+                    <li ng-repeat="page in pageSkip" ng-class="{'active':$index + 1==skip}" ng-click="getList($index+1,sdata)" ng-if="skip*1 + 1 > $index && skip*1 - $index < 4 "
+                        class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">{{$index + 1}}</a>
+                    </li>
+                    <li ng-click="getList(maxPageSkip,sdata)" class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">末页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

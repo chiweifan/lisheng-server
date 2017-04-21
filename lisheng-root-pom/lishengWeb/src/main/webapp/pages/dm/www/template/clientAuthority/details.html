@@ -1,0 +1,198 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box">
+            <div class="main-box-body" style="padding:10px 20px 10px 0px;">
+                <div class="row se" ng-repeat="info in infos">
+                    <a class="col-lg-1 btn btn-success pull-right" href="#/clientAuthority/edit?clientId={{clientId}}">
+                        编辑客户
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 list-box">
+        <!--pin title-->
+        <div class="main-box pin-title">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table">
+                    <tr>
+                        <td>姓名</td>
+                        <td>手机号</td>
+                        <td>本月订单数</td>
+                        <td>本月订单金额</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--no contract-->
+        <div class="main-box empty-list" ng-if="!infoss">
+            暂无数据
+        </div>
+
+        <!--订单-->
+        <div class="main-box" ng-repeat="info in infos">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table">
+                    <tr>
+                        <td>
+                            {{info.clientName}}
+                        </td>
+                        <td>
+                            {{info.phoneNum}}
+                        </td>
+                        <td>
+                            {{info.orderCount}}
+                        </td>
+
+                        <td>
+                            {{info.orderAmountByMonth}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 list-box" ng-repeat="(community, detailList) in details">
+        <!--pin title-->
+        <div class="main-box pin-title">
+            <div class="main-box-body main-box-table clearfix">
+                <h2>{{community}}</h2>
+                <table class="table">
+                    <tr>
+                        <td>门禁类型</td>
+                        <td>门禁子类型</td>
+                        <td>产品类型</td>
+                        <td>产品编号</td>
+                        <td>合同编号</td>
+                        <td>合同有效时间</td>
+                        <td>手动设置有效时间</td>
+                        <td>备注</td>
+                        <td>操作</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--no contract-->
+        <div class="main-box empty-list" ng-if="!details">
+            暂无数据
+        </div>
+
+        <!--拥有门禁详情-->
+        <div class="main-box">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table table table-striped table-hover">
+                    <tr ng-repeat="detail in detailList | filter: filter2">
+                        <td>
+                            {{detail.doorTypeName}}
+                        </td>
+                        <td>
+                            {{detail.childDoorTypeName}}
+                        </td>
+                        <td>
+                            {{detail.boardRoomTypeName}}
+                        </td>
+
+                        <td>
+                            {{detail.boardRoomNO}}
+                        </td>
+
+                        <td>
+                            {{detail.orderId}}
+                        </td>
+
+                        <td>
+                            {{detail.startTime | date:'yyyy-MM-dd'}} ~ {{detail.endTime | date:'yyyy-MM-dd'}}
+                        </td>
+                        <td>
+                            {{detail.changeStartTime | date:'yyyy-MM-dd'}} ~ {{detail.changeEndTime | date:'yyyy-MM-dd'}}
+                        </td>
+                        <td>
+                            {{detail.remark}}
+                        </td>
+                        <td>
+                            <span class="td-btn" ng-click="delay(detail.doorAuthId)" ng-if="detail.orderId">延5天</span>
+                            <span class="td-btn" ng-click="change(detail.doorAuthId)" ng-if="!detail.orderId">修改有效时间</span>
+                            <p></p>
+                            <span class="td-btn" ng-click="delete(detail.doorAuthId)">删除权限</span>
+                            <!--<p></p>
+                            <span class="td-btn" ng-click="change(detail.doorAuthId)">修改有效时间</span>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除权限-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">删除权限</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h2>是否删除权限？</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveDelete()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--延5天-->
+<div class="modal fade" id="delay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">延5天</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h2>确定为该用户延5天权限？</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveDelay()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改有效时间-->
+<div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改有效时间</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>开始时间</label>
+                    <input ng-model="sdata.startTime" type="text" class="form-control datepicker" readonly placeholder="请选择起始时间">
+                    <label>结束时间</label>
+                    <input ng-model="sdata.endTime" type="text" class="form-control datepicker" readonly placeholder="请选择结束时间">
+                    <label>备注</label>
+                    <textarea class="form-control" maxlength="200" ng-model="remark"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveChange()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

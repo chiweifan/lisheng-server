@@ -1,0 +1,683 @@
+.datetimepicker table tr td span {
+    font-size: 13px;
+}
+
+.table tbody>tr>td:first-child {
+    font-size: 0.875em;
+}
+
+.theme-whbl #sidebar-nav .nav>li>a {
+    border-color: #3498db;
+    font-size: 16px;
+    background: #fff;
+    padding: 8px 2px 8px 20px;
+}
+
+.inDashboard {
+    margin-left: 0 !important;
+}
+
+.theme-whbl .navbar>.container .navbar-brand {
+    background-color: #3498db;
+    width: 150px;
+}
+
+#sidebar-nav .nav>li>a>span {
+    margin-left: 0;
+}
+
+#sidebar-nav .nav li .submenu>li>a {
+    padding-left: 25px;
+}
+
+.datetimepicker {
+    z-index: 2000 !important;
+}
+
+
+/*loading*/
+
+.loading-overlay {
+    background-color: black;
+    -ms-filter: "alpha(opacity=40)";
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: block;
+    z-index: 1000;
+}
+
+.loading {
+    width: 100px;
+    height: 50px;
+    background: #333;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    border-radius: 10px;
+    z-index: 2000;
+}
+
+
+/*Typing Loader*/
+
+.typing_loader {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    -webkit-animation: typing 1s linear infinite alternate;
+    -moz-animation: Typing 1s linear infinite alternate;
+    animation: typing 1s linear infinite alternate;
+    margin: 24px auto;
+    /* Not necessary- its only for layouting*/
+    position: relative;
+    left: -10px;
+}
+
+@-webkit-keyframes typing {
+    0% {
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 0.2), 24px 0px 0px 0px rgba(255, 255, 255, 0.2);
+    }
+    25% {
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 2), 24px 0px 0px 0px rgba(255, 255, 255, 0.2);
+    }
+    75% {
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 0.2), 24px 0px 0px 0px rgba(255, 255, 255, 1);
+    }
+}
+
+@-moz-keyframes typing {
+    0% {
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 0.2), 24px 0px 0px 0px rgba(255, 255, 255, 0.2);
+    }
+    25% {
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 2), 24px 0px 0px 0px rgba(255, 255, 255, 0.2);
+    }
+    75% {
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 0.2), 24px 0px 0px 0px rgba(255, 255, 255, 1);
+    }
+}
+
+@keyframes typing {
+    0% {
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 0.2), 24px 0px 0px 0px rgba(255, 255, 255, 0.2);
+    }
+    25% {
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 2), 24px 0px 0px 0px rgba(255, 255, 255, 0.2);
+    }
+    75% {
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 12px 0px 0px 0px rgba(255, 255, 255, 0.2), 24px 0px 0px 0px rgba(255, 255, 255, 1);
+    }
+}
+
+
+/*page animation*/
+
+@-webkit-keyframes a {
+    0% {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        opacity: 0
+    }
+    to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+    }
+}
+
+@keyframes a {
+    0% {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        opacity: 0
+    }
+    to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes b {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+    }
+    to {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        opacity: 0
+    }
+}
+
+@keyframes b {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1
+    }
+    to {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+        opacity: 0
+    }
+}
+
+body {
+    height: 100%;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+}
+
+.enter,
+.leave {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1
+}
+
+.enter {
+    -webkit-animation: a .4s forwards;
+    animation: a .4s forwards
+}
+
+.leave {
+    -webkit-animation: b .4s forwards;
+    animation: b .4s forwards
+}
+
+
+/*dashboard*/
+
+.dash-box {
+    padding: 20px;
+}
+
+.dash-box .value {
+    font-size: 18px;
+}
+
+.dash-box .headline {
+    font-size: 14px;
+}
+
+.dash-box .headline a {
+    border: 1px solid #ddd;
+    padding: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-box {
+    padding-top: 5px;
+}
+
+.search-box .main-box-body {
+    padding-bottom: 0;
+}
+
+.search-row {
+    line-height: 25px;
+    border-bottom: 1px dashed #ddd;
+    margin-top: 5px;
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+}
+
+.search-row:last-child {
+    border: none;
+}
+
+.search-row .form-control {
+    height: 28px;
+    line-height: 28px;
+}
+
+.search-row .form-group {
+    margin-bottom: 5px;
+}
+
+.search-tips {
+    color: #999;
+}
+
+.search-btn {
+    padding: 10px 0;
+}
+
+
+/*pin title*/
+
+.main-box .main-box-table {
+    padding: 0;
+    font-size: 13px;
+}
+
+.main-box .main-box-table table {
+    margin-bottom: 0;
+}
+
+.main-box .main-box-table table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.main-box .main-box-table table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+
+/*.pin-title{
+    margin-bottom: 10px;
+    background: #3498db;
+    color:#fff;
+    position: relative;
+    top: -8px;
+    z-index: 10;
+}*/
+
+.pin-title td {
+    border-color: #1A8DAF !important;
+}
+
+.next-btn {
+    padding: 10px 0;
+    background: #ddd;
+    position: fixed;
+    margin-left: -15px;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.next-btn span,
+.next-btn a {
+    position: relative;
+    left: 45%;
+}
+
+.icon-arrow-left {
+    content: " ";
+    display: inline-block;
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    height: 12px;
+    width: 12px;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    position: relative;
+}
+
+.icon-arrow-right {
+    content: " ";
+    display: inline-block;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    height: 12px;
+    width: 12px;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    position: relative;
+}
+
+.stations-control {
+    border-radius: 3px;
+    background-clip: padding-box;
+    border-color: #e7ebee;
+    box-shadow: none;
+    font-size: 13px;
+}
+
+.stations-control label {
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    margin: 3px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.stations-control label input {
+    margin-right: 5px;
+}
+
+.stock-label {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.staion-name {
+    padding: 0 5px;
+    display: inline-block;
+}
+
+.preview-table {
+    table-layout: fixed;
+}
+
+
+/*pin title*/
+
+.list-box {
+    position: relative;
+}
+
+.pin-title table {
+    background: #3498db;
+    color: #fff;
+}
+
+.table-fixed {
+    position: fixed;
+    top: 0;
+    padding-right: 15px;
+}
+
+.table-fixed table {}
+
+
+/*审批*/
+
+.audit-status {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #ddd;
+    display: inline-block;
+    text-align: center;
+    line-height: 100px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.audit-list {
+    border-left: 10px solid #c2dcee;
+    padding: 50px 0px 50px 50px;
+    height: 100%;
+}
+
+.cd-timeline-content {
+    position: relative;
+    background: #fff;
+    border-radius: 3px;
+    padding: 0.5em;
+    box-shadow: 1px 1px 2px 0 #cccccc;
+    margin-bottom: 20px;
+}
+
+.cd-timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    right: 100%;
+    height: 0;
+    width: 0;
+    border: 17px solid transparent;
+    border-right: 17px solid white;
+}
+
+.audit-list-fa {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    left: -80px;
+    background: #c2dcee;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    color: #fff !important;
+}
+
+.audit-list-fa.green {
+    background: #2ecc71 !important;
+}
+
+.audit-list-fa.blue {
+    background: #3498db !important;
+}
+
+.audit-list-fa.red {
+    background: #fb6262;
+}
+
+.cd-timeline-content h2 {
+    padding: 0 10px;
+}
+
+.cd-timeline-content h2 .cd-date {
+    font-size: 16px;
+}
+
+.cd-timeline-content p {
+    padding: 0 10px;
+}
+
+.cd-timeline-content p.remark {
+    background: #dceffc;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.view-title-fixed {
+    background: #c1cfd8;
+    position: fixed;
+    top: 50px;
+    z-index: 100;
+    margin-left: -15px;
+    padding: 5px 0px;
+}
+
+.title-fixed {
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+}
+
+.view-title-fixed button {
+    margin-right: 15px;
+}
+
+.weui_article {
+    padding: 20px 15px;
+}
+
+.weui_article .contract-title {
+    text-align: center;
+    font-size: 1.5em !important;
+}
+
+.weui_article .table {
+    table-layout: fixed !important;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.weui_article section h2 {
+    font-size: 1.2em;
+    margin-bottom: 0.6em;
+}
+
+.weui_article section p {
+    margin-bottom: 0.6em;
+}
+
+.empty-list {
+    text-align: center;
+    padding: 2em 0;
+    font-size: 2em;
+    color: #eee;
+}
+
+.list-table {
+    margin-bottom: 0;
+}
+
+.main-box-list .main-box-body {
+    padding-bottom: 0 !important;
+}
+
+.td-btn {
+    border: 1px solid #ddd;
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.td-btn:active {
+    background: #ddd;
+    color: #eee;
+}
+
+.contract-btn-box button,
+.contract-btn-box a {
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+.upload-btn {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.underline {
+    border-bottom: 1px solid #ddd;
+}
+
+.rent-form label {
+    text-align: left !important;
+    width: 110px;
+    padding-left: 16px;
+}
+
+.rent-form-padding {
+    padding-top: 20px;
+}
+
+.rent-detail-title {
+    text-align: center;
+}
+
+.clear-search {
+    margin-right: 10px;
+    background: #ddd;
+    border-bottom-color: #bfbdbd;
+}
+
+.contractNo-status {
+    display: inline-block;
+    background: #f97474;
+    color: #fff;
+    border-radius: 5px;
+    padding: 1px 3px;
+    font-size: 12px;
+}
+
+.order-setting span {
+    border: 1px solid #1A8DAF;
+    display: inline-block;
+    color: #1A8DAF;
+    padding: 3px 2px;
+    border-radius: 5px;
+}
+
+.commission-col {
+    text-align: center;
+}
+
+.commission-col p:first-child {
+    font-size: 3em;
+}
+
+.order-product:first-child {
+    border-bottom: 1px solid #ddd;
+}
+
+.order-product span {
+    width: 31.99%;
+    display: inline-block;
+    padding: 10px 5px 10px 0px;
+    border-left: 1px solid #ddd;
+}
+
+.order-product span:first-child {
+    border-left: none;
+}
+
+.logo-right-name {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    line-height: 45px;
+}
+
+._block {
+    /*display:table-row同样可以解决该问题*/
+    display: '';
+}
+
+._none {
+    display: none;
+}
+
+.filter {
+    height: 50px;
+    line-height: 50px;
+}
+
+.filter a {
+    text-decoration: none;
+    color: #828a92;
+    margin-right: 20px;
+}
+
+.filter a:first-child {
+    margin-left: 10px;
+}
+
+.filter a:nth-child(3) {
+    margin-right: 30px;
+}
+
+a:hover,
+a:active,
+a:link,
+a:visited {
+    text-decoration: none;
+    color: #828a92;
+}
+
+.filter input {
+    display: inline-block;
+    width: 30%;
+}
+
+.actived {
+    color: #3d464d !important;
+}

@@ -1,0 +1,153 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box">
+            <div class="main-box-body" style="padding:10px 20px 10px 0px;">
+                <div class="row se">
+                    <a class="btn btn-success pull-right" ng-click="createType()">
+                        创建单位类型
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 list-box">
+        <!--pin title-->
+        <div class="main-box pin-title">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table">
+                    <tr>
+                        <td>单位类型</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--no contract-->
+        <div class="main-box empty-list" ng-if="!unitInfo">
+            暂无数据
+        </div>
+
+        <!--单位类型-->
+        <div class="main-box">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table table table-striped table-hover">
+                    <tr ng-repeat="unit in unitInfo">
+                        <td>
+                            {{unit.unitName}}
+                        </td>
+                        <td ng-if="unit.status === 1">
+                            使用中
+                        </td>
+                        <td ng-if="unit.status === 2">
+                            停用中
+                        </td>
+
+                        <td>
+                            <!--<p>-->
+                            <span class="td-btn" ng-click="editType(unit.unitId, unit.unitName)">编辑</span>
+                            <!--</p>-->
+                            <!--<p>-->
+                            <span class="td-btn" ng-if="unit.status == 2" ng-click="startUsing(unit.unitId)">启用</span>
+                            <!--</p>-->
+                            <!--<p>-->
+                            <span class="td-btn" ng-if="unit.status == 1" ng-click="stopUsing(unit.unitId)">停用</span>
+                            <!--</p>-->
+                            <!--<span class="td-btn">操作记录</span>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--normal page-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box">
+            <div class="dataTables_paginate paging_simple_numbers">
+                <ul class="pagination pull-right">
+                    <li class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">(共{{maxPageSkip}}页)</a>
+                    </li>
+                    <li ng-click="getlist(1,sdata)" class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">首页</a>
+                    </li>
+                    <li ng-repeat="page in pageSkip" ng-class="{'active':$index + 1==skip}" ng-click="getlist($index+1,sdata)" ng-if="skip*1 + 1 > $index && skip*1 - $index < 4 " class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">{{$index + 1}}</a>
+                    </li>
+                    <li ng-click="getlist(maxPageSkip,sdata)" class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">末页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--启用-->
+<div class="modal fade" id="startUsing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">启用单位</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h2>是否启用当前单位？</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveStartUsing()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--停用-->
+<div class="modal fade" id="stopUsing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">禁用单位</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h2>是否禁用当前类型？</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveStopUsing()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--编辑/创建-->
+<div class="modal fade" id="editType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑类型</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>单位类型</label>
+                    <input type="text" class="form-control" placeholder="请输入单位类型名称" ng-model="unitName">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveEditType()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

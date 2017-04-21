@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lisheng.manage.dao.OrderMapper">
+	
+	<insert id="saveOrder">
+		insert into `order` (clientId , startTime , endTime , unitName , count , spec , unitPrice , sum , status , createTime)
+		values
+		(#{clientId},#{startTime},#{endTime},#{unitName},#{count},#{spec},#{unitPrice},#{sum},#{status} ,#{createTime})
+	</insert>
+	
+	<update id="updateOrderStatus">
+		update `order` set  status = #{status} where orderId = #{orderId}
+	</update>
+	
+	<select id="queryOrderList" resultType="com.lisheng.manage.model.OrderDTO">
+		select o.orderId , o.clientId , o.unitName , o.count , o.spec , o.unitPrice , o.sum , o.status , o.createTime , c.clientName
+		from `order` o left join client c on o.clientId = c.clientId
+		<where>
+			<if test="orderId != null and orderId > 0 ">
+				o.orderId = #{orderId}
+			</if>
+			<if test="clientId != null and clientId > 0 ">
+				and o.clientId = #{clientId}
+			</if>
+			<if test="status != null and status > 0 ">
+				and o.status = #{status}
+			</if>
+			<if test="createTime != null  ">
+				and DATE_FORMAT(o.createTime,"%Y-%m") = DATE_FORMAT(#{createTime},"%Y-%m")
+			</if>
+		</where>
+		order by o.orderId desc
+		limit #{startRow} ,#{pageSize}
+	</select>
+	
+	<select id="queryOrderCount" resultType="java.lang.Integer">
+		select count(1)
+		from `order`
+		<where>
+			<if test="orderId != null and orderId > 0 ">
+				orderId = #{orderId}
+			</if>
+			<if test="clientId != null and clientId > 0 ">
+				and clientId = #{clientId}
+			</if>
+			<if test="status != null and status > 0 ">
+				and status = #{status}
+			</if>
+			<if test="createTime != null  ">
+				and DATE_FORMAT(createTime,"%Y-%m") = DATE_FORMAT(#{createTime},"%Y-%m")
+			</if>
+		</where>
+	</select>
+	
+</mapper>

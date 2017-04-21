@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lisheng.manage.dao.UnitMapper">
+	
+	<insert id="saveUnit">
+		insert into unit (unitName , status , createTime) values (#{unitName} , #{status} , #{createTime})
+	</insert>
+	
+	<update id="updateUnitStatus">
+		update unit set status = #{status} where unitId = #{unitId}
+	</update>
+	
+	<select id="queryUnitsList" resultType="com.lisheng.manage.model.UnitDTO">
+		select unitId , unitName , status from unit where 1 = 1 
+		<if test=" unitId != null and unitId > 0">
+			and unitId = #{unitId}
+		</if>
+		<if test=" status != null and status > 0">
+			and status = #{status}
+		</if>
+	</select>
+	
+	<update id="updateUnit">
+		update unit set unitName = #{unitName} where unitId = #{unitId}
+	</update>
+	
+</mapper>

@@ -1,0 +1,257 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box">
+            <div class="main-box-body" style="padding:10px 20px 10px 0px;">
+                <div class="row se">
+                    <a class="col-lg-1 btn btn-success pull-right" href="#/compartment/createOrder">
+                        创建订单
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+
+        <!--ng-if="searchHide == true"-->
+        <div class="main-box search-box-hide" ng-show="searchHide">
+            <div class="main-box-header">
+                <h2>检索条件 <button class="btn btn-warning pull-right" ng-click="searchHide = !searchHide">展开搜索条件</button></h2>
+            </div>
+        </div>
+        <div class="main-box search-box" ng-show="!searchHide">
+            <div class="main-box-body">
+                <div class="row search-row">
+                    <div class="col-lg-1 search-tips">
+                        按时间
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class="col-lg-4 control-label">下单时间</label>
+                        <div class="col-lg-8">
+                            <input ng-model="sdata.createTime" type="text" class="form-control datepicker" readonly placeholder="请选择下单时间">
+                        </div>
+                    </div>
+                    <span class="label label-warning pull-right" ng-click="searchHide = !searchHide">
+                        收起
+                    </span>
+                </div>
+                <div class="row search-row">
+                    <div class="col-lg-1 search-tips">
+                        按状态
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class="col-lg-4 control-label">订单状态</label>
+                        <div class="col-lg-8">
+                            <select class="form-control" ng-model="sdata.status">
+                                <option value="">-- 不限 --</option>
+                                <option value="1">
+                                    进行中
+                                </option>
+                                <option value="2">
+                                    已发货
+                                </option>
+                                <option value="3">
+                                    作废
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+    	<div class="row search-row">
+                    <div class="col-lg-1 search-tips">
+                        按客户
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class="col-lg-4 control-label">请选择客户</label>
+                        <div class="col-lg-8">
+                            <select class="form-control" ng-model="sdata.clientId">
+                                <option value="">-- 不限 --</option>
+                                <option ng-repeat="client in cilents" value="{{client.clientId}}">
+                                	{{client.clientName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row search-btn">
+                    <button class="btn btn-success pull-right" ng-click="getlist(1,sdata)">
+                        查询
+                    </button>
+                    <button class="btn pull-right clear-search" ng-click="sdata = []; cityId=''">清空条件</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 list-box">
+        <!--pin title-->
+        <div class="main-box pin-title">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table">
+                    <tr>
+                        <td>订单id</td>
+                        <td>客户名称</td>
+                        <td>下单时间</td>
+                        <td>订单单价</td>
+                        <td>数量</td>
+                        <td>单位</td>
+                        <td>产品规格</td>
+                        <td>订单价格</td>
+                        <td>订单状态</td>
+                        <td>操作</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--no contract-->
+        <div class="main-box empty-list" ng-if="!orderList">
+            暂无数据
+        </div>
+
+        <!--订单-->
+        <div class="main-box">
+            <div class="main-box-body main-box-table clearfix">
+                <table class="table table table-striped table-hover">
+                    <tr ng-repeat="orderInfo in orderList">
+                        <td>
+                            {{orderInfo.orderId}}
+                        </td>
+                        <td>
+                            {{orderInfo.clientName}}
+                        </td>
+                        <td>
+                           {{orderInfo.createTime | date:'yyyy-MM-dd'}}
+                        </td>
+
+                        <td>
+                            {{orderInfo.unitPrice}}
+                        </td>
+                        <td>
+                            {{orderInfo.count}}
+                        </td>
+                        <td>
+                            {{orderInfo.unitName}}
+                        </td>
+                        <td>
+                            {{orderInfo.spec}}
+                        </td>
+                        <td>
+                            {{orderInfo.sum}}
+                        </td>
+                        <td ng-if="orderInfo.status == 1">
+                           <font color="red">{{orderInfo.statusName}}</font> 
+                        </td>
+                        <td ng-if="orderInfo.status == 2">
+                           <font color="green">{{orderInfo.statusName}}</font> 
+                        </td>
+                        <td ng-if="orderInfo.status == 3">
+                           <font color="gray">{{orderInfo.statusName}}</font> 
+                        </td>
+                        <td>
+                            <p>
+                                <span class="td-btn" ng-if="orderInfo.status == 1 || orderInfo.status == 2" ng-click="cancle(orderInfo.orderId)">作废</span>
+                            </p>
+                            <p>
+                                <span class="td-btn" ng-if="orderInfo.status == 1" ng-click="stopOrder(orderInfo.orderId)">出货</span>
+                            </p>
+                            <p>
+                                <span class="td-btn" ng-if="orderInfo.status == 2" ng-click="reUseOrder(orderInfo.orderId)">恢复</span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--作废门禁-->
+<div class="modal fade" id="cancleDoor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">作废订单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h2>是否作废当前订单？</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveCancleOrder()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--停用门禁-->
+<div class="modal fade" id="stopOrder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">订单出货</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h2>是否确认该订单要出货？</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveStopOrder()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--恢复门禁-->
+<div class="modal fade" id="reUseDoor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">恢复订单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h2>是否恢复当前订单？</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveReUseOrder()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--normal page-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box">
+            <div class="dataTables_paginate paging_simple_numbers">
+                <ul class="pagination pull-right">
+                    <li class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">(共{{maxPageSkip}}页)</a>
+                    </li>
+                    <li ng-click="getlist(1,sdata)" class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">首页</a>
+                    </li>
+                    <li ng-repeat="page in pageSkip" ng-class="{'active':$index + 1==skip}" ng-click="getlist($index+1,sdata)" ng-if="skip*1 + 1 > $index && skip*1 - $index < 4 " class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">{{$index + 1}}</a>
+                    </li>
+                    <li ng-click="getlist(maxPageSkip,sdata)" class="paginate_button" aria-controls="table-example" tabindex="0">
+                        <a href="javascript:;">末页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

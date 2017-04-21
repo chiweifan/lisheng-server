@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		 <setting name="cacheEnabled" value="false" /><!-- 全局映射器启用缓存 -->   
+        <setting name="useGeneratedKeys" value="true" /> 
+        <setting name="defaultExecutorType" value="REUSE" /> 
+	</settings>
+	<!-- 分页插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<!-- 数据库方言，指定具体要连接数据库 -->
+			<property name="dialect" value="mysql" />
+			<!-- 设置为true时，分页查询的时候，同时会查询总数 -->
+			<property name="rowBoundsWithCount" value="true" />
+		</plugin>
+	</plugins>
+	
+</configuration>

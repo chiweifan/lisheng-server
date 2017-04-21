@@ -69,7 +69,7 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean> 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.lisheg.manage.dao" />
+		<property name="basePackage" value="com.lisheng.manage.dao" />
 	</bean>
 	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">

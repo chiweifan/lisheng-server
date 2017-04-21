@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lisheng.manage.dao.OrderMapper">
+	
+	<insert id="saveOrder">
+		insert into `order` (clientId , startTime , endTime , unitName , count , spec , unitPrice , sum , status , createTime)
+		values
+		(#{clientId},#{startTime},#{endTime},#{unitName},#{count},#{spec},#{unitPrice},#{sum},#{status} ,#{createTime})
+	</insert>
+	
+	<update id="updateOrderStatus">
+		update set `order` status = #{status} where orderId = #{orderId}
+	</update>
+	
+</mapper>

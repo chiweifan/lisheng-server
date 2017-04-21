@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>立胜订单管理</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link href="http://cdn.bootcss.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.bootcss.com/p/bootstrap-datetimepicker/bootstrap-datetimepicker/css/datetimepicker.css">
+
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <!--libs-->
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.5.0/angular.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+    <!--controller-->
+
+    <!--
+    <script src="./dest/js/controller.min.js"></script>
+    -->
+
+    <!--cdn改为本地文件-->
+    <!--<link rel="stylesheet" type="text/css" href="./libs/bootstrap.min.css">
+    <link rel="stylesheet" href="./libs/font-awesome.min.css">
+    <link rel="stylesheet" href="./libs/datetimepicker.css">
+    <link rel="stylesheet" href="./libs/sweetalert.min.css">
+
+    <link href="./css/theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/bootstrap.min.js"></script>
+    <script src="./libs/angular.min.js"></script>
+    <script src="./libs/angular-ui-router.min.js"></script>
+    <script src="./libs/ng-file-upload.min.js"></script>
+    <script src="./libs/ng-file-upload-shim.min.js"></script>-->
+
+
+    <script src="./app.js"></script>
+    <script src="./service.js"></script>
+    <script src="./js/compartment.js"></script>
+    <script src="./js/settype.js"></script>
+    <script src="./js/employeeAuthority.js"></script>
+    <script src="./js/clientAuthority.js"></script>
+    <script src="./js/createdoor.js"></script>
+
+</head>
+
+<body class="tpace-done theme-whbl">
+    <div id="theme-wrapper">
+        <header class="navbar" id="header-navbar">
+            <div class="container">
+                <a href="#" id="logo" class="navbar-brand">
+                    <img src="img/logo.png" alt="" class="normal-logo logo-white">
+                </a>
+                <div class="clearfix">
+                    <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="nav-no-collapse pull-right" id="header-nav">
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="hidden-xxs">
+<!--                                 <a class="btn" href="/backend/loginOut"> -->
+<!--                                     <i class="fa fa-power-off"></i> 退出 -->
+<!--                                 </a> -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--<div id="page-wrapper" class="container">
+            
+            <div class="row">-->
+
+        <!--menu-->
+        <!--<div id="nav-col">
+                    <section id="col-left" class="col-left-nano">
+                        <div id="col-left-inner" class="col-left-nano-content">
+                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-toggle">
+                                            <span>门禁</span>
+                                        </a>
+                                        <ul class="submenu" style="display: block;">
+                                            <li>
+                                                <a href="#/compartment">
+                                                    包间
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#/meetingroom">
+                                                    会议室
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#/gate">
+                                                    大门
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>-->
+
+        <div id="page-wrapper" class="container">
+
+            <div class="row">
+                <!--menu-->
+                <div id="nav-col" ng-if="showMenu">
+                    <section id="col-left" class="col-left-nano">
+                        <div id="col-left-inner" class="col-left-nano-content">
+                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li ng-repeat="menu in menus">
+                                        <a href="javascript:;" class="dropdown-toggle">
+                                            <span>{{menu.menuName}}</span>
+                                        </a>
+                                        <ul class="submenu" style="display: block;">
+                                            <li ng-repeat="child in menu.childrenMenuList">
+                                                <a ng-class="{'active':child.isActive}" ng-href="{{child.url}}">
+                                                    {{child.menuName}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!--<div id="content-wrapper" ng-class="{'inDashboard':!showMenu}">-->
+                <div id="content-wrapper">
+
+                    <div ui-view></div>
+                    <!-- <ui-view class="fad"></ui-view> -->
+                    <footer id="footer-bar" class="row" style="opacity: 1;">
+                        <p id="footer-copyright" class="col-xs-12">
+                            © 2017 <a href="#" target="_blank">立胜薄膜</a>. 池炜钒.
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading" ng-if="showLoading">
+        <div class="typing_loader"></div>
+    </div>
+    <div class="loading-overlay" ng-if="showLoading"></div>
+
+    <!--<script src="./js/scripts.js"></script>-->
+    <script src="http://www.bootcss.com/p/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <!--<script src="./libs/bootstrap-datetimepicker.min.js"></script>
+    <script src="./libs/sweetalert.min.js"></script>-->
+</body>
+
+</html>

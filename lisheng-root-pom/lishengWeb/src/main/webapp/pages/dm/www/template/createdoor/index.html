@@ -1,0 +1,142 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <h1>
+            创建订单
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="main-box">
+            <div class="main-box-header">
+                <h2>
+                    请选择客户
+                </h2>
+            </div>
+            <div class="main-box-body form-horizontal">
+                <!--<div class="form-group" ng-if="userinfo">
+                    <label class="col-lg-2 control-label">
+                        <font color="red">*</font>社区</label>
+                    <div class="col-lg-10">
+                        <input ng-model="sdata.nomineName" class="form-control" placeholder="点击选择用户作为指定人" readonly maxlength="45" ng-click="enterPriseUser()">
+                    </div>
+                </div>-->
+
+                <!--<div class="form-group" ng-if="!userinfo">
+                    <label class="col-lg-2 control-label">
+                        <font color="red">*</font>指定人</label>
+                    <div class="col-lg-10">
+                        <input ng-model="sdata.nomineName" class="form-control" placeholder="点击选择用户作为指定人" readonly maxlength="45" ng-click="selectUser()">
+                    </div>
+                </div>-->
+
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input  ng-click="selectCilent()" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="点击选择客户" readonly="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="main-box">
+            <div class="main-box-header">
+                <h2>
+                    订单信息
+                </h2>
+            </div>
+            <div class="main-box-body form-horizontal" >
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">
+                        <font color="red">*</font>客户名称</label>
+                    <div class="col-lg-10">
+                        <input ng-model="orderInfo.clientName" class="form-control" placeholder="请选择客户" maxlength="45">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">
+                        <font color="red">*</font>订单单价</label>
+                    <div class="col-lg-10">
+                        <input type="number" ng-model="orderInfo.unitPrice" class="form-control" placeholder="请输入订单单价" maxlength="45">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">
+                        <font color="red">*</font>订单数量</label>
+                    <div class="col-lg-10">
+                        <input type="number" ng-model="orderInfo.count" class="form-control" placeholder="请输入订单数量" maxlength="45">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">
+                        <font color="red">*</font>货品单位</label>
+
+                    <div class="col-lg-10">
+                        <select ng-model="orderInfo.unitName" class="form-control">
+                                <option value="">-- 不限 --</option>
+                                <option value="{{unit.unitName}}" ng-repeat = "unit in units" >
+                                    {{unit.unitName}}
+                                </option>
+                            </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">
+                        <font color="red">*</font>货品规格</label>
+                    <div class="col-lg-10">
+                        <input  ng-model="orderInfo.spec" class="form-control" placeholder="请输入产品规格" maxlength="45">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="next-btn">
+    <span class="btn btn-success" ng-click="save()">创建</span>
+</div>
+
+
+<div class="modal fade" id="selectClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">搜索客户</h4>
+            </div>
+           <div class="modal-body">
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input ng-model="sdata.clientName" type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="输入客户名查询">
+                    </div>
+                    <div class="form-group">
+                        <input ng-model="sdata.phoneNum" type="number" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="输入手机号查询">
+                    </div>
+                    <button ng-click="searchClient(sdata.clientName,sdata.phoneNum)" class="btn btn-success">搜索</button>
+                </div>
+
+<!-- 				<p ng-repeat="client in clients"> -->
+<!-- 					{{client.clientName}} - {{client.phoneNum}}				 -->
+<!-- 				</p> -->
+				<table>  
+				<tr ng-repeat="client in clients">  
+				<td>  
+				<input type="radio" value="{{client.clientId}}" ng-model="$parent.clientId"/>{{client.clientName}} - {{client.phoneNum}}  
+				</td>  
+				</tr>  
+				</table> 
+				
+                <!-- ngRepeat: user in users -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveSelectClient()">好了</button>
+            </div>
+        </div>
+    </div>
+</div>
