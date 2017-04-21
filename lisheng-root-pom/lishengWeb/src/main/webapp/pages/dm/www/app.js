@@ -10,7 +10,7 @@ if (window.location.host.indexOf('localhost') >= 0 || window.location.host.index
     // api = 'http://10.218.19.227:8080/doorManagement';
     //api = 'http://10.218.14.90:8080/backgroundManagement';
 } else {
-    api = 'http://' + window.location.host + '/doorManagement';
+    api = 'http://' + window.location.host + '/lishengWeb';
 };
 
 app.config(function($stateProvider, $urlRouterProvider) {
